@@ -1,0 +1,27 @@
+/* header */
+$header-height: 50px;
+
+/* main */
+$main-bg-color: #EEF0F3;
+
+/* footer */
+$footer-height: 30px;
+
+/* menu */
+$menu-collapse-width: 54px;
+$menu-popup-width: 170px;
+$menu-width: 235px;
+$horizontal-menu-height: 50px;
+$night-menu-bg-color: #304156;
+$night-menu-item-bg-color: #1f2d3d;
+$night-menu-item-bg-hover-color: #001528;
+$night-menu-title-bg-hover-color: #263445;
+$light-menu-bg-color: #fdfdfd;
+$light-menu-item-bg-color: #f6f6f6;
+$light-menu-item-bg-hover-color: #EAEAEA;
+$light-menu-title-bg-hover-color: #f0f0f0;
+
+:export {
+  menuNightBg: $night-menu-bg-color;
+  menuLightBg: $light-menu-bg-color;
+}

@@ -1,0 +1,86 @@
+#stretchableTable {
+  border-collapse: collapse;
+  border-color: black;
+}
+
+#stretchableTable th {
+  font-size: 18px;
+  max-width: 225px;
+  padding: 6px;
+  line-height: 17px;
+  font-family: 'SimSun', serif;
+  color: black;
+  user-select: none;
+}
+
+#stretchableTable td {
+  font-size: 16px;
+  max-width: 225px;
+  line-height: 22px;
+  padding: 2px;
+  font-family: 'SimSun', serif;
+  color: black;
+  text-align: center;
+}
+
+#stretchableTable span {
+  font-size: 16px;
+  max-width: 225px;
+  line-height: 22px;
+  word-break: break-word;
+  padding: 2px;
+  font-family: 'SimSun', serif;
+}
+
+#scoreTable {
+  margin-top: -1px !important;
+  border-collapse: collapse;
+  border-color: black;
+}
+
+#scoreTable th {
+  font-size: 18px;
+  max-width: 225px;
+  padding: 6px;
+  line-height: 17px;
+  font-family: 'SimSun', serif;
+  color: black;
+  user-select: none;
+}
+
+#scoreTable td {
+  font-size: 17px;
+  max-width: 225px;
+  line-height: 22px;
+  padding: 6px;
+  font-family: 'SimSun', serif;
+  color: black;
+}
+
+#scoreTable span {
+  font-size: 17px;
+  max-width: 225px;
+  line-height: 22px;
+  word-break: break-word;
+  padding: 6px;
+  font-family: 'SimSun', serif;
+}
+
+.cursorFile {
+  color: rgb(0, 112, 192);
+}
+
+.uploadFileHover {
+  color: red;
+}
+
+.red {
+  color: red;
+}
+
+.span-100 {
+  display: inline-block;
+  width: 100%;
+  padding: 0;
+  cursor: pointer;
+}
