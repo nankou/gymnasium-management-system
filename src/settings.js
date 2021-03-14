@@ -3,19 +3,19 @@ module.exports = {
    * @description 网站设置
    * */
   // 网站标题
-  title: "岭南师范学院",
+  title: "GMS管理系统",
   // 菜单标题
-  menuTitle: "岭师党建系统 - 后台管理",
+  menuTitle: "GMS体育馆管理系统",
   // 底部文字
-  footerTxt: "© 2020 Wang YePeng Wteam.All rights reserved",
+  footerTxt: "© 2020 Wteam.All rights reserved",
   // 备案号
-  caseNumber: "粤ICP备23001351号",
+  caseNumber: "粤ICP备20210222号",
 
   /**
    * @description 系统设置
    * */
   // store's key前缀
-  prefix: "PARTY-SYSTEM",
+  prefix: "GYMNASIUM-SYSTEM",
   // 是否开启验证码
   hasCode: false,
   // 记住密码时token的存储时间(天)

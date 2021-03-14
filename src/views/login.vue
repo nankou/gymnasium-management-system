@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <el-form ref="Form" :model="form" :rules="rules" label-position="left" label-width="0px" class="login-form">
-      <h3 class="title">{{title}}党建系统 - 后台登陆</h3>
+      <h3 class="title">{{title}} - 后台登陆</h3>
       <el-form-item prop="username">
         <el-input v-model="form.username" type="text" auto-complete="off" placeholder="工号/学号">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon"/>
@@ -122,7 +122,7 @@
               if (result.status !== 200) throw new Error();
               this.$storeSet('setToken', result.resultParam.token);
               // 动态拉取路由和菜单
-              return generateRouter();
+              // return asyncRoutes();
             })
             .then(() => {
               this.$storeSet('setRememberMe', {

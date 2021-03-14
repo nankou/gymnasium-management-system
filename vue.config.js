@@ -94,7 +94,7 @@ module.exports = {
     hotOnly: false,
     proxy: {
       "/api": {
-        // target: "http://localhost:8089",
+        // target: "http://localhost:8002",
         target: "http://180.76.164.146:8080",
         // target: "http://192.168.1.100:8089",
         changeOrigin: true,
