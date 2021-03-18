@@ -1,4 +1,5 @@
 import service from "@/api/axios";
+import qs from "qs";
 
 /**
  * @author chenjiajing
@@ -17,7 +18,7 @@ export function getCodeApi(data) {
 export function loginApi(data) {
   return service({
     method: "post",
-    url: 'admin/login/login',
+    url: '/admin/login/login',
     data: data,
     headers: {"Content-Type": "application/x-www-form-urlencoded"},
     transformRequest: [data => qs.stringify(data)]

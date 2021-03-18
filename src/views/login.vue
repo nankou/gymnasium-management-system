@@ -112,11 +112,14 @@
           })
       },
       submit() {
+        console.log("触发了方法")
         this.$refs['Form'].validate(valid => {
+          console.log("valid")
           if (!valid) return false;
           this.isLoading = true;
           const data = {...this.form};
           data.password = encrypt(data.password);
+          console.log("加密好了密码")
           loginApi(data)
             .then(result => {
               if (result.status !== 200) throw new Error();
@@ -133,6 +136,7 @@
               this.isLoading = false;
             })
             .catch(() => {
+              console.log("抛出错误")
               this.getCode();
               this.isLoading = false;
             })
