@@ -7,7 +7,7 @@ module.exports = {
   // 菜单标题
   menuTitle: "GMS体育馆管理系统",
   // 底部文字
-  footerTxt: "© 2020 Wteam.All rights reserved",
+  footerTxt: "© 2020 jijianbu.All rights reserved",
   // 备案号
   caseNumber: "粤ICP备20210222号",
 
