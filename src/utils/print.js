@@ -1,5 +1,6 @@
-// 打印类属性、方法定义
-/* eslint-disable */
+/**
+ * @description 打印
+ * */
 const Print = function (dom, options) {
   if (!(this instanceof Print)) return new Print(dom, options);
 
@@ -128,7 +129,7 @@ Print.prototype = {
     }
 };
 const MyPlugin = {};
-MyPlugin.install = function (Vue, options) {
+MyPlugin.install = function (Vue) {
   // 4. 添加实例方法
   Vue.prototype.$print = Print
 };

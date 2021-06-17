@@ -1,36 +1,30 @@
 <template>
-  <div class="player">
-    <video-player
-        class="video-player vjs-custom-skin"
-        ref="VideoPlayer"
-        :playsinline="true"
-        style="object-fit:fill"
-        :options="playerOptions"
-        :x5-video-player-fullscreen="true"
-        @play="onPlayerPlay($event)"
-    >
-    </video-player>
-  </div>
+  <video-player
+      class="video-player vjs-custom-skin"
+      ref="VideoPlayer"
+      :playsinline="true"
+      style="object-fit:fill"
+      :options="playerOptions"
+      :x5-video-player-fullscreen="true"
+  />
 </template>
 
 <script>
   import {videoPlayer} from 'vue-video-player';
-  import 'video.js/dist/video-js.css'
-  import 'vue-video-player/src/custom-theme.css'
+  import 'video.js/dist/video-js.css';
+  import 'vue-video-player/src/custom-theme.css';
 
   export default {
-    name: 'VideoPlayer',
-    components: {
-      videoPlayer
-    },
+    name: "VideoPlayer",
+    components: {videoPlayer},
     props: {
-      sources: {
+      src: {
+        type: String,
         required: true
       }
     },
     data() {
       return {
-        timer: null,
         playerOptions: {
           autoplay: false, // 如果true,浏览器准备好时开始回放。
           muted: false, // 默认情况下将会消除任何音频。
@@ -41,53 +35,14 @@
           fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
           sources: [{
             type: "video/mp4",
-            src: this.sources
+            src: this.src
           }],
-          poster: "封面地址",
-          width: 900,
-          notSupportedMessage: '此视频暂无法播放', // 允许覆盖Video.js无法播放媒体源时显示的默认信息。
+          notSupportedMessage: '此视频暂无法播放',
           controlBar: {
-            // timeDivider: true,
-            // durationDisplay: true,
-            // remainingTimeDisplay: false,
-            fullscreenToggle: true  // 全屏按钮
+            fullscreenToggle: true // 全屏按钮
           }
         }
-      }
-    },
-    mounted() {
-      this.timer = setInterval(() => {
-        let duration = this.player.cache_.duration
-        if (!duration) duration = 0
-        duration = parseInt(duration)
-        this.$emit('getDuration', duration)
-      }, 1000)
-    },
-    beforeDestroy() {
-      clearInterval(this.timer)
-    },
-    methods: {
-      onPlayerPlay(player) {
-        player.play()
-      }
-    },
-    computed: {
-      player() {
-        return this.$refs.VideoPlayer.player
-      }
-    },
-    watch: {
-      sources(value) {
-        this.player.src(value)
-        this.player.reset()
-      }
+      };
     }
   }
 </script>
-
-<style>
-  .player {
-    width: 460px;
-    margin: 0 auto;
-  }
-</style>

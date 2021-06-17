@@ -1,7 +1,7 @@
 import Vue from "vue";
 import store from "@/store";
-import "./EUI_IN"
 import {Message, MessageBox, Notification, Loading} from 'element-ui';
+import "./EUI_IN"
 
 
 /**
@@ -82,6 +82,7 @@ export const errorMessage = (msg, time = 3000) => {
   }, time);
 };
 
+
 /**
  * @description 加载提示
  */
@@ -99,6 +100,7 @@ export const startLoading = (text = '加载中...') => {
 export const stopLoading = () => {
   LOADING.close();
 };
+
 
 /**
  * @description 全局注册

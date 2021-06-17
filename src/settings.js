@@ -3,39 +3,37 @@ module.exports = {
    * @description 网站设置
    * */
   // 网站标题
-  title: "GMS管理系统",
+  title: "GMS-ADMIN",
   // 菜单标题
-  menuTitle: "GMS体育馆管理系统",
+  menuTitle: "GMS - 后台管理",
   // 底部文字
-  footerTxt: "© 2020 jijianbu.All rights reserved",
+  footerTxt: "© 2020 Wang YePeng GMS.All rights reserved",
   // 备案号
-  caseNumber: "粤ICP备20210222号",
+  caseNumber: "粤ICP备23001351号",
 
   /**
    * @description 系统设置
    * */
   // store's key前缀
-  prefix: "GYMNASIUM-SYSTEM",
+  prefix: "ADMIN",
   // 是否开启验证码
-  hasCode: false,
+  hasCode: true,
   // 记住密码时token的存储时间(天)
   tokenCookieExpires: 7,
   // 请求超时时间(s)
-  timeout: 120 * 1000,
-  // 请求超时时间(min)
-  overtime: 20 * 60000,
+  timeout: 60 * 1000,
   // 是否启用history
   isHistory: false,
   // 分页条数设置
   pagingSize: 10,
   // 上传图片大小限制(MB)
-  imageLimit: 10,
+  imageLimit: 2,
   // 上传文档大小限制(MB)
-  documentLimit: 20,
+  documentLimit: 10,
   // 上传音频大小限制(MB)
-  audioLimit: 20,
+  audioLimit: 10,
   // 上传视频大小限制(MB)
-  videoLimit: 500,
+  videoLimit: 40,
 
   /**
    * @description 样式设置

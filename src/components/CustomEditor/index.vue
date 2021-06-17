@@ -24,7 +24,7 @@
   import "tinymce/plugins/codesample"; // 插入代码
 
   import {uploadDocumentsPlusApi, uploadPicturePlusApi} from '@/api/file'
-  import {getFile} from "@/utils/common";
+  import {getFile, randomString} from "@/utils/common";
 
   export default {
     name: "CustomEditor",
@@ -33,23 +33,26 @@
         type: String,
         default: ''
       },
-      editorKey: { // 同一页面多个富文本要传唯一值
-        type: Number,
-        default: 0
-      },
       typePath: {
         type: String,
         default: 'editor'
+      },
+      height: {
+        type: Number,
+        default: 500
       }
     },
     data() {
       return {
-        flag: true,
+        isFirst: true,
+        tinymce: null,
+        editorKey: '',
+        asyncInit: true,
         DefaultInit: {
           language_url: "/assets/tinymce/langs/zh_CN.js", //导入语言文件
           skin_url: "/assets/tinymce/skins/ui/oxide", //主题样式
           language: "zh_CN", //语言设置
-          height: 500, //高度
+          height: this.height, //高度
           content_style: "img {max-width:100%;}", // 限制图片大小
           menubar: false, // 最上方menu菜单
           browser_spellcheck: true, // 拼写检查
@@ -72,23 +75,38 @@
         }
       }
     },
+    created() {
+      this.editorKey = randomString(8)
+    },
     mounted() {
-      this.init();
+      this.initTinymce();
+    },
+    activated() {
+      if (this.isFirst) {
+        this.isFirst = false
+        return
+      }
+      this.initTinymce();
+    },
+    destroyed() {
+      this.destroyTinymce();
+    },
+    deactivated() {
+      this.destroyTinymce();
     },
     watch: {
-      value(val, old) {
-        if (val && !old) { // 第一次输入执行
-          if (this.flag === false) return
-          this.set(val)
+      value(val) {
+        if (val && this.asyncInit && this.tinymce) { // 第一次输入执行
+          this.tinymce.setContent(val);
         }
-        if (!val) { // 清空执行
-          this.flag = true;
-          this.set();
+        if (!val && this.tinymce) { // 清空执行
+          this.asyncInit = true;
+          this.tinymce.setContent('');
         }
       }
     },
     methods: {
-      init() {
+      initTinymce() {
         tinymce.init({
           // 挂载的DOM对象
           selector: `#custom-editor-${this.editorKey}`,
@@ -123,28 +141,23 @@
           },
           // 监听富文本内容
           setup: (editor) => {
+            editor.on('init', () => {
+              this.tinymce = editor;
+              if (this.value) editor.setContent(this.value)
+            })
             editor.on('input change undo redo', () => {
-              this.flag = false;
-              this.$emit('input', this.get());
+              this.asyncInit = false;
+              this.$emit('input', editor.getContent());
               this.$parent.$emit('el.form.change')
             })
           }
         });
       },
-      // 获得富文本内容
-      get() {
-        return tinymce.activeEditor.getContent()
-      },
-      // 设置富文本内容
-      set(value = "") {
-        tinymce.editors[`custom-editor-${this.editorKey}`].setContent(value)
+      destroyTinymce() {
+        this.tinymce.destroy();
+        let element = document.getElementById(`custom-editor-${this.editorKey}`);
+        if (element) element.style.visibility = 'hidden'
       }
-    },
-    // 退出销毁
-    beforeDestroy() {
-      tinymce.remove();
-      let element = document.getElementById(`custom-editor-${this.editorKey}`);
-      element.style.visibility = 'hidden'
     }
   };
 </script>

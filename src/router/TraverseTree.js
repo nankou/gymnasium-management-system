@@ -36,32 +36,44 @@ export class TraverseTree {
 
     // 路由
     if (item.iframe === false && item.name) {
-      if (item.child) {
-        let children = item.child.split(',')
-        let route = {
-          name: item.name,
-          path: item.path,
-          redirect: `${item.path}/${children[0]}`,
-          component: () => import(`@/views${item.path}`),
-          children: []
-        }
-        children.forEach(child => {
-          route.children.push({
-            name: `${item.name}_${child}`,
-            path: `${item.path}/${child}`,
-            meta: {title: item.title, active: item.name},
-            component: () => import(`@/views${item.path}/${child}`),
-          })
-        })
-        this.layout.children.push(route)
-      } else {
+      // 不含嵌套路由
+      if (!item.child) {
         this.layout.children.push({
           name: item.name,
           path: item.path,
           meta: {title: item.title},
           component: () => import(`@/views${item.path}`)
         })
+        return
       }
+
+      // 含嵌套路由
+      let children = item.child.split(',')
+      let route = {
+        name: item.name,
+        path: item.path,
+        redirect: `${item.path}/${children[0]}`,
+        component: () => import(`@/views${item.path}`),
+        children: []
+      }
+      children.forEach(child => {
+        let index = child.indexOf('/:')
+        let childName = ''
+        let childParams = ''
+        if (index >= 0) { // 带参数
+          childName = child.substring(0, index)
+          childParams = child.substring(index)
+        } else { // 不带参数
+          childName = child
+        }
+        route.children.push({
+          name: `${item.name}_${childName}`,
+          path: `${item.path}/${childName}${childParams}`,
+          meta: {title: item.title, active: item.name},
+          component: () => import(`@/views${item.path}/${childName}`),
+        })
+      })
+      this.layout.children.push(route)
     }
   }
 

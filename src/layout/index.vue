@@ -35,7 +35,7 @@
 
   export default {
     name: 'Layout',
-    components: {AdminFooter, AdminMain, NavBar,AdminMenu, Breadcrumb, Tag},
+    components: {AdminFooter, AdminMain, NavBar, AdminMenu, Breadcrumb, Tag},
     computed: {
       isDrawer: {
         get() {

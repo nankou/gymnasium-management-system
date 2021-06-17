@@ -9,7 +9,7 @@
         :on-change="changeUpload"
     >
       <el-avatar shape="circle" :size="120" :src="url">
-        <img src="../../assets/notFound.png" alt="头像"/>
+        <img :src="require('@/assets/notFound.png')" alt="头像"/>
       </el-avatar>
     </el-upload>
     <!-- vueCropper 剪裁图片实现-->

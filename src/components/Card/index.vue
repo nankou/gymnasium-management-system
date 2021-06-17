@@ -60,6 +60,7 @@
       box-sizing: border-box;
 
       & > div > span {
+        font-weight: bold;
         font-size: 18px;
       }
     }

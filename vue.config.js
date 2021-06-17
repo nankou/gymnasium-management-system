@@ -19,7 +19,8 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.symlinks(true);
     config.resolve.alias.set("@", resolve("src"));
-    // 图标
+    config.plugins.delete("preload");
+    config.plugins.delete("prefetch");
     config.module
       .rule("svg")
       .exclude.add(resolve("src/icons"))
@@ -33,52 +34,6 @@ module.exports = {
       .loader("svg-sprite-loader")
       .options({symbolId: "icon-[name]"})
       .end();
-    // 预加载
-    config.plugins.delete('preload')
-    config.plugins.delete('prefetch')
-    // 分模块打包
-    config
-      .when(process.env.NODE_ENV === 'production',
-        config => {
-          config
-            .plugin('ScriptExtHtmlWebpackPlugin')
-            .after('html')
-            .use('script-ext-html-webpack-plugin', [{
-              inline: /runtime\..*\.js$/
-            }])
-            .end()
-          config
-            .optimization.splitChunks({
-            chunks: 'all',
-            cacheGroups: {
-              libs: {
-                name: 'chunk-libs',
-                test: /[\\/]node_modules[\\/]/,
-                priority: 10,
-                chunks: 'initial'
-              },
-              tinymce: {
-                name: 'chunk-tinymce',
-                priority: 15,
-                test: /[\\/]node_modules[\\/]_?tinymce(.*)/
-              },
-              elementUI: {
-                name: 'chunk-elementUI',
-                priority: 20,
-                test: /[\\/]node_modules[\\/]_?element-ui(.*)/
-              },
-              commons: {
-                name: 'chunk-commons',
-                test: resolve('src/components'),
-                minChunks: 3,
-                priority: 5,
-                reuseExistingChunk: true
-              }
-            }
-          })
-          config.optimization.runtimeChunk('single')
-        }
-      )
   },
   css: {
     loaderOptions: {
@@ -89,14 +44,13 @@ module.exports = {
   },
   devServer: {
     open: false,
+    host: "0.0.0.0",
     port: 8088,
     https: false,
     hotOnly: false,
     proxy: {
       "/api": {
-        // target: "http://localhost:8002",
-        // target: "http://180.76.164.146:8080",
-        // target: "http://192.168.1.100:8089",
+        target: "http://localhost:8090",
         changeOrigin: true,
         pathRewrite: {
           "^/api": ""

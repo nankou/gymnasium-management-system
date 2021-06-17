@@ -264,7 +264,7 @@ export default {
                 :src="$baseApi + scope.row.image"
                 :preview-src-list="[$baseApi + scope.row.image]">
             <div slot="error">
-              <img src="../../assets/notFound.png" alt="" style="150px"/>
+              <img :src="require('@/assets/notFound.png')" alt="" style="width: 150px"/>
             </div>
           </el-image>
         </template>

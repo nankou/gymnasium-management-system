@@ -31,12 +31,8 @@ service.interceptors.response.use(
     const {message, status} = response.data;
     if (message && status === 200)
       successMsg(message);
-    if (message && status === 403) {
-      if (process.env.NODE_ENV === 'development')
-        errorMsg(`权限不足，无 ${response.config.url} 接口权限`)
-      else
-        errorMsg(`权限不足`)
-    }
+    if (message && status === 403)
+      errorMsg(`权限不足，无 ${response.config.url} 接口权限`)
     if (message && status !== 200 && status !== 403) {
       if (message.includes('Data too long'))
         errorMsg('内容过长，请求失败')

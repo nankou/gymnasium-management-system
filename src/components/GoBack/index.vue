@@ -17,7 +17,13 @@
     },
     methods: {
       goBack() {
-        this.$emit('back')
+        this.$msgBox(this.text ? this.text : '确定返回？')
+          .then(() => {
+            this.$emit('back')
+          })
+          .catch(() => {
+            return false
+          })
       }
     }
   }

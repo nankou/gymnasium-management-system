@@ -12,7 +12,7 @@
     <el-dropdown trigger="click">
       <div class="el-dropdown-link">
         <el-avatar shape="square" :size="44" :src="avatarUrl">
-          <img src="../../assets/notFound.png" alt="头像"/>
+          <img :src="require('@/assets/notFound.png')" alt="头像"/>
         </el-avatar>
       </div>
       <el-dropdown-menu slot="dropdown">

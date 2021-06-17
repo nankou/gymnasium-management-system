@@ -99,6 +99,11 @@
         }
       }
     },
+    mounted() {
+      if (!isEmpty(this.value)) {
+        this.val = this.value
+      }
+    },
     methods: {
       input(val) {
         this.$emit('input', val);

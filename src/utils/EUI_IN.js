@@ -62,32 +62,3 @@ Vue.component("ElIcon", Icon);
 Vue.component("ElDatePicker", DatePicker);
 Vue.component("ElAutocomplete", Autocomplete);
 Vue.use(Loading.directive);
-
-/**
- * @description 自定义Element-UI组件
- * */
-import Card from "@/components/Card";
-import RowCol from "@/components/RowCol";
-import GoBack from "@/components/GoBack";
-import TreeSelect from "@/components/TreeSelect";
-import ExpandTable from "@/components/ExpandTable";
-import SelectionTable from "@/components/SelectionTable";
-import DeleteButton from "@/components/DeleteButton";
-import SubmitButton from "@/components/SubmitButton";
-import CustomizedPagination from "@/components/Pagination";
-
-Vue.component("Card", Card);
-Vue.component("RowCol", RowCol);
-Vue.component("GoBack", GoBack);
-Vue.component("TreeSelect", TreeSelect);
-Vue.component("ExpandTable", ExpandTable);
-Vue.component("SelectionTable", SelectionTable);
-Vue.component("DeleteButton", DeleteButton);
-Vue.component("SubmitButton", SubmitButton);
-Vue.component("Pagination", CustomizedPagination);
-
-Vue.component("CustomEditor", () => import("@/components/CustomEditor"));
-Vue.component("ImageUploader", () => import("@/components/ImageUploader"));
-Vue.component("ImageUploaderBatch", () => import("@/components/ImageUploaderBatch"));
-Vue.component("VideoUploader", () => import("@/components/VideoUploader"));
-Vue.component("DateTimePicker", () => import("@/components/DateTimePicker"));

@@ -37,18 +37,6 @@ export const hasPermission = value => {
 }
 
 /**
- * @param html
- * @return {String}
- * @description 过滤富文本HTML标签
- * */
-export const filterHtml = (html = '') => {
-  if (!html) return ''
-  html = html.replace('↵', '')
-  const re1 = new RegExp('<.+?>', 'g')
-  return html.replace(re1, '')
-}
-
-/**
  * @param {Number} limit
  * @param {String} fileType
  * @description 获得文件
@@ -81,7 +69,7 @@ export const getFile = (limit = documentLimit, fileType = '') => {
 }
 
 /**
- * @param {Date|String} time
+ * @param {Date} time
  * @param {String} formatStr
  * @return {String}
  * @description 格式化时间
@@ -92,7 +80,7 @@ export const formatDate = (time, formatStr = 'YYYY-MM-DD') => {
 };
 
 /**
- * @param {Date|String} time
+ * @param {Date} time
  * @param {String} formatStr
  * @return {String}
  * @description 格式化时间
@@ -228,15 +216,6 @@ export const resetData = (_this, key = null) => {
 
 /**
  * @author 王业鹏
- * @return {String}
- * @description 获取年份
- **/
-export const getCurrentYear = () => {
-  return new Date().getFullYear().toString()
-};
-
-/**
- * @author 王业鹏
  * @param {Object} obj
  * @description 去除对象空键
  **/
@@ -290,8 +269,16 @@ export function deepClone(data) {
 }
 
 /**
- * @description 判断浏览器类型
+ * @description 生成随机字符串
  **/
-export function isIE() {
-  return !!window.ActiveXObject || "ActiveXObject" in window;
+export const randomString = (e) => {
+  e = e || 32;
+  let t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678",
+    a = t.length,
+    n = "";
+  let i = 0
+  for (i; i < e; i++) {
+    n += t.charAt(Math.floor(Math.random() * a));
+  }
+  return n
 }

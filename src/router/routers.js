@@ -23,8 +23,7 @@ const constantRouterMap = [
     path: '/login',
     meta: {title: '登录'},
     component: () => import('@/views/login')
-  },
-
+  }
 ];
 
 const createRouter = () => new Router({

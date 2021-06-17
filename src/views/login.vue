@@ -1,9 +1,9 @@
 <template>
   <div id="login">
     <el-form ref="Form" :model="form" :rules="rules" label-position="left" label-width="0px" class="login-form">
-      <h3 class="title">{{title}} - 后台登陆</h3>
+      <h3 class="title">{{title}} 后台管理系统</h3>
       <el-form-item prop="username">
-        <el-input v-model="form.username" type="text" auto-complete="off" placeholder="工号/学号">
+        <el-input v-model="form.username" type="text" auto-complete="off" placeholder="用户名">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon"/>
         </el-input>
       </el-form-item>
@@ -61,7 +61,7 @@
           uuid: ''
         },
         rules: {
-          username: {required: true, message: '请输入工号/学号', trigger: 'blur'},
+          username: {required: true, message: '请输入用户名', trigger: 'blur'},
           password: {required: true, message: '请输入密码', trigger: 'blur'},
           code: {required: true, message: '请输入验证码', trigger: 'blur'}
         }
@@ -112,31 +112,29 @@
           })
       },
       submit() {
-        console.log("触发了方法")
         this.$refs['Form'].validate(valid => {
-          console.log("valid")
           if (!valid) return false;
           this.isLoading = true;
           const data = {...this.form};
           data.password = encrypt(data.password);
-          console.log("加密好了密码")
           loginApi(data)
             .then(result => {
               if (result.status !== 200) throw new Error();
               this.$storeSet('setToken', result.resultParam.token);
               // 动态拉取路由和菜单
-              // return asyncRoutes();
+              return generateRouter();
             })
             .then(() => {
               this.$storeSet('setRememberMe', {
                 rememberMe: this.isRememberMe,
                 username: this.form.username
               });
-              this.$router.push({name: 'home'});
+              let redirect = this.$route.query.redirect || ''
+              if (redirect) this.$router.push(redirect);
+              else this.$router.push({name: 'home'});
               this.isLoading = false;
             })
             .catch(() => {
-              console.log("抛出错误")
               this.getCode();
               this.isLoading = false;
             })
@@ -152,7 +150,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    background: url("../assets/home.jpg") no-repeat center center;
+    background: url("../assets/background.png") no-repeat center center;
     background-size: cover;
 
     .title {
@@ -160,12 +158,12 @@
       text-align: center;
       font-size: 18px;
       font-weight: 600;
-      color: #707070;
+      color: #ffffff;
     }
 
     .login-form {
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(0, 0, 0, .15);
       width: 350px;
       padding: 25px 25px 5px 25px;
 

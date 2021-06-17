@@ -21,9 +21,7 @@
       <div class="el-upload__tip" slot="tip">只能上传{{accept}}文件，不超过{{size}}MB，且至多{{limit}}个</div>
     </el-upload>
     <el-dialog :visible.sync="visible" append-to-body width="900px">
-      <video v-if="visible" :src="url" controls="controls" width="100%">
-        <span>您的浏览器不支持！</span>
-      </video>
+      <video-player v-if="visible" :src="url"></video-player>
     </el-dialog>
   </div>
 </template>
@@ -33,6 +31,7 @@
 
   export default {
     name: "VideoUploader",
+    components: {VideoPlayer: () => import('../VideoPlayer')},
     props: {
       value: {
         type: String,
@@ -45,10 +44,6 @@
       size: { // 大小限制(MB)
         type: Number,
         default: videoLimit
-      },
-      canPreview: { // 是否能预览
-        type: Boolean,
-        default: true
       }
     },
     data() {
@@ -56,7 +51,7 @@
         url: '',
         visible: false,
         isInit: true,
-        accept: ".mp4, .webm",
+        accept: ".avi, .mp4, .flv, .wmv, .mkv",
         limit: 1,
         fileList: []
       };
@@ -84,18 +79,18 @@
     methods: {
       init() {
         let list = this.value.split('/');
-        this.fileList = [{name: list[list.length - 1], url: this.value}]
+        this.fileList = [{name: list[list.length - 1], url: this.$baseApi + this.value}]
         this.isInit = false
       },
       onPreview(file) {
-        if (!this.canPreview) return;
-        this.visible = true;
         if (file.url) {
           this.url = file.url;
+          this.visible = true;
           return
         }
         if (file.raw) {
           this.url = URL.createObjectURL(file.raw)
+          this.visible = true;
         }
       },
       onChange() {
@@ -107,7 +102,7 @@
           this.$errorMsg('上传失败')
           return
         }
-        this.$emit("input", this.$baseApi + result.resultParam.uploadFilePath);
+        this.$emit("input", result.resultParam.uploadFilePath);
         this.$parent.$emit('el.form.change');
       },
       onRemove() {

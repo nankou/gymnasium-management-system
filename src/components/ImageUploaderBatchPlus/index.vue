@@ -50,7 +50,7 @@
             @imgLoad="imgLoad"/>
       </div>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="reset">取 消</el-button>
+        <el-button @click="cropperVisible = false">取 消</el-button>
         <submit-button ref="Submit" @submit="submit"/>
       </div>
     </el-dialog>

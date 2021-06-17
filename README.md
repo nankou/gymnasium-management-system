@@ -1,24 +1,19 @@
+<h1 style="text-align: center">ADMIN-MASTER</h1>
 
+版本：`2.0`（日期：2020-06-08）
 
-## Project setup
-```
-yarn install
-```
+<br/>
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+#### Build Setup
+``` bash
+# 安装node.js
 
-### Compiles and minifies for production
-```
-yarn build
-```
+# 安装依赖
+npm i / cnpm i
 
-### Lints and fixes files
-```
-yarn lint
-```
+# 启动服务 localhost:8088
+npm run dev / npm run serve
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 构建生产环境
+npm run build
+```

@@ -49,7 +49,7 @@
             @imgLoad="imgLoad"/>
       </div>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="reset">取 消</el-button>
+        <el-button @click="cropperVisible = false">取 消</el-button>
         <submit-button ref="Submit" @submit="submit"/>
       </div>
     </el-dialog>
@@ -133,7 +133,7 @@
     },
     methods: {
       init() {
-        this.fileList = [{url: this.$baseApi + this.vakue}]
+        this.fileList = [{url: this.$baseApi + this.value}]
         this.changeHidden(this.fileList)
         this.isInit = false
       },

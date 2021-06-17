@@ -1,18 +1,30 @@
 <template>
-  <div id="home" :style="'height:' + (mainHeight - 30) + 'px'" v-show="isShow"></div>
+  <div id="home" :style="'height:' + (mainHeight - 30) + 'px'" v-show="isShow">
+    <h1 class="title">{{title}} - 后台管理系统</h1>
+  </div>
+  <!--  <example></example>-->
 </template>
 
 <script>
+  const {title} = require("@/settings");
   const elementResizeDetectorMaker = require("element-resize-detector");
   let mainResizeListen = elementResizeDetectorMaker();
 
   export default {
     name: "Home",
+    components: {
+      // Example: () => import('./Example')
+    },
     data() {
       return {
         mainHeight: 0,
         isShow: false
       };
+    },
+    computed: {
+      title() {
+        return title
+      }
     },
     mounted() {
       this.addListen();
@@ -43,5 +55,12 @@
     border-radius: 4px;
     background: url("../../assets/home.jpg") no-repeat center center;
     background-size: cover;
+
+    .title {
+      padding-top: 50px;
+      color: beige;
+      font-size: 50px;
+      text-align: center;
+    }
   }
 </style>
