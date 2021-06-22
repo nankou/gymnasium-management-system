@@ -23,3 +23,18 @@ export const uploadVideoPlusApi = (data, callback, source) => axiosFs('file/uplo
  * */
 export const uploadDocumentsApi = data => axiosF('file/uploadDocumentsFile', data);
 export const uploadDocumentsPlusApi = data => axiosFs('file/uploadDocumentsFile', data);
+
+export class addFieldApi {
+}
+
+export class addFileApi {
+}
+
+export class delFieldApi {
+}
+
+export class getFieldApi {
+}
+
+export class pageFieldApi {
+}

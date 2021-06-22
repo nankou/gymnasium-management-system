@@ -68,7 +68,7 @@
         rules: {
           name: {required: true, message: '请输入赛事名称', trigger: 'blur'},
           beginTime: {required: true, message: '请选择使用时间', trigger: 'change'},
-          type: {required: true, message: '请输入场地类型', trigger: 'blur'},
+          type: {required: true, message: '请输入赛事类型', trigger: 'blur'},
           phone: {required: true, message: '请输入联系方式', trigger: 'blur'},
           purpose: {required: true, message: '请输入赛事目的', trigger: 'blur'}
         }

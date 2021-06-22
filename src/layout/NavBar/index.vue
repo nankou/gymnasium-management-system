@@ -1,11 +1,11 @@
 <template>
   <div id="nav-bar">
-    <div class="search-menu" v-show="!isSmall">
-      <search-menu/>
-    </div>
-    <div class="screen-full-button" v-show="!isSmall">
-      <screen-full/>
-    </div>
+<!--    <div class="search-menu" v-show="!isSmall">-->
+<!--      <search-menu/>-->
+<!--    </div>-->
+<!--    <div class="screen-full-button" v-show="!isSmall">-->
+<!--      <screen-full/>-->
+<!--    </div>-->
     <div class="code-copy" v-if="$isDev">
       <code-copy/>
     </div>
@@ -31,15 +31,15 @@
 </template>
 
 <script>
-  import ScreenFull from './ScreenFull'
-  import SearchMenu from './SearchMenu'
+  // import ScreenFull from './ScreenFull'
+  // import SearchMenu from './SearchMenu'
   import DrawerSetting from './DrawerSetting'
   import {logoutApi} from '@/api/person'
 
   export default {
     name: "NavBar",
     components: {
-      ScreenFull, SearchMenu, DrawerSetting,
+       DrawerSetting,
       CodeCopy: () => import('./CodeCopy')
     },
     data() {

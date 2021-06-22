@@ -1,6 +1,6 @@
 <template>
   <div id="home" :style="'height:' + (mainHeight - 30) + 'px'" v-show="isShow">
-    <h1 class="title">{{title}} - 后台管理系统</h1>
+<!--    <h1 class="title">{{title}} - 后台管理系统</h1>-->
   </div>
   <!--  <example></example>-->
 </template>

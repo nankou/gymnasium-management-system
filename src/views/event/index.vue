@@ -1,18 +1,12 @@
 <template>
   <card ref="Card">
     <div slot="header">
-      <span>赛事管理</span>
+      <span class="title">赛事管理</span>
+      <el-input placeholder="输入赛事名称搜索" v-model="searchName" clearable class="w-200" @keyup.enter.native="getData"/>
+      <el-button type="success" class="el-icon-search ml-5" @click="getData">搜索</el-button>
       <el-button class="float-right" type="primary" icon="el-icon-plus" @click="add">创建赛事</el-button>
     </div>
     <expand-table :data="formData">
-<!--      <el-table-column type="expand">-->
-<!--        <template slot-scope="props">-->
-<!--          <div class="expand-table-content">-->
-<!--            <span>申请原因:</span>-->
-<!--            <pre>{{props.row.reason}}</pre>-->
-<!--          </div>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
       <el-table-column prop="name" label="赛事名称">
         <template slot-scope="scope">
           <span>{{scope.row.name}}</span>
@@ -28,26 +22,22 @@
           <span>{{scope.row.endTime | formatDateTime}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="type" label="场地类型"/>
+      <el-table-column prop="type" label="赛事类型"/>
       <el-table-column prop="purpose" label="比赛目的"/>
       <el-table-column prop="sponsor" label="主办方"/>
-      <el-table-column prop="fieldStatus" label="场地审批状态">
-        <template slot-scope="scope">
-          <el-tag v-if="scope.row.fieldOrder===0" type="danger">未通过</el-tag>
-          <el-tag v-if="scope.row.fieldOrder===1" type="warning">审核中</el-tag>
-          <el-tag v-if="scope.row.fieldOrder===2" type="success">已通过</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="equipStatus" label="器材审批状态">
-        <template slot-scope="scope">
-          <el-tag v-if="scope.row.equipOrder===0" type="danger">未通过</el-tag>
-          <el-tag v-if="scope.row.equipOrder===1" type="warning">审核中</el-tag>
-          <el-tag v-if="scope.row.equipOrder===2" type="success">已通过</el-tag>
-        </template>
-      </el-table-column>
       <el-table-column prop="createTime" label="创建日期">
         <template slot-scope="scope">
           <span>{{scope.row.createTime | formatDateTime}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="fieldStatus" label="场地安排">
+        <template slot-scope="scope">
+        <el-button type="warning" icon="el-icon-circle-plus-outline" @click.stop="fieldManager(scope.row)" >安排场地</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column prop="equipStatus" label="器材安排">
+        <template slot-scope="scope">
+        <el-button type="warning" icon="el-icon-circle-plus-outline" @click.stop="equipManager(scope.row)" >安排器材</el-button>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="150">
@@ -60,21 +50,26 @@
     <add ref="Add" @update="getData"></add>
     <pagination ref="Pagination" @update="getData"/>
     <edit ref="Edit" @update="getData"/>
+    <Equip ref="Equip" @update="getData"/>
+    <Field ref="Field" @update="getData"/>
   </card>
 </template>
 
 <script>
 import Add from './add'
 import Edit from './edit'
+import Field from './field'
+import Equip from './equip'
 import {delEventApi, getEventApi, pageEventApi} from "../../api/event";
 import {objectEvaluate} from "@/utils/common";
 
 export default {
   name: 'event',
-  components: {Add,Edit},
+  components: {Add,Edit,Field,Equip},
   data() {
     return {
-      formData: [] // 状态 0 不通过 1 审核中 2 通过
+      formData: [],
+      searchName: ''
     }
   },
   mounted() {
@@ -86,7 +81,8 @@ export default {
       let pagination = this.$refs.Pagination;
       let param = {
         current: pagination.current,
-        size: pagination.size
+        size: pagination.size,
+        name : this.searchName
       };
       pageEventApi(param).then(result => {
         let response = result.resultParam.eventPage;
@@ -98,20 +94,29 @@ export default {
     add() {
       this.$refs.Add.visible = true
     },
+    fieldManager(obj){
+      this.$refs.Field.visible = true
+      this.$refs.Field.form.eventId = obj.id
+      this.$refs.Field.getFieldList(obj.id);
+      this.$refs.Field.getFieldReserveList(obj.id);
+    },
+    equipManager(obj){
+      this.$refs.Equip.visible = true
+      this.$refs.Equip.form.eventId = obj.id
+      this.$refs.Equip.getEquipList();
+      this.$refs.Equip.getRentEquipmentList(obj.id);
+    },
     // 编辑
     edit(obj) {
       this.$refs.Card.start();
       this.$refs.Edit.visible = true
       getEventApi({id: obj.id}).then(result => {
-        let response = result.resultParam.eventPage.event;
-        objectEvaluate(_this.form, response, this);
+        let response = result.resultParam.event;
         let _this = this.$refs.Edit;
+        _this.form.id = obj.id; // 添加编辑的id
+        objectEvaluate(_this.form, response, this);
         _this.visible = true;
-        console.log(_this)
         this.$refs.Card.stop();
-      //   response.deptIds = response.depts.map(item => {
-      //     if (item) return item.id;
-      //   });
       }).catch(() => {
         this.$refs.Card.stop();
       })
@@ -135,6 +140,9 @@ export default {
 <style>
 .event {
   padding: 10px 20px;
+}
+.title{
+  padding: 10px;
 }
 </style>
 

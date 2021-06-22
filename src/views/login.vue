@@ -3,7 +3,7 @@
     <el-form ref="Form" :model="form" :rules="rules" label-position="left" label-width="0px" class="login-form">
       <h3 class="title">{{title}} 后台管理系统</h3>
       <el-form-item prop="username">
-        <el-input v-model="form.username" type="text" auto-complete="off" placeholder="用户名">
+        <el-input v-model="form.username" type="text" auto-complete="off" placeholder="学号">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon"/>
         </el-input>
       </el-form-item>

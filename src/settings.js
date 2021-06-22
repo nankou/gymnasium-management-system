@@ -3,11 +3,11 @@ module.exports = {
    * @description 网站设置
    * */
   // 网站标题
-  title: "GMS-ADMIN",
+  title: "GMS",
   // 菜单标题
-  menuTitle: "GMS - 后台管理",
+  menuTitle: "GMS体育馆管理系统",
   // 底部文字
-  footerTxt: "© 2020 Wang YePeng GMS.All rights reserved",
+  footerTxt: "© 2020 wteam GMS.All rights reserved",
   // 备案号
   caseNumber: "粤ICP备23001351号",
 
@@ -43,9 +43,9 @@ module.exports = {
   // 是否显示logo
   isShowLogo: true,
   // 是否显示标签
-  isShowTag: true,
+  isShowTag: false,
   // 是否显示面包屑
-  isShowBreadcrumb: true,
+  isShowBreadcrumb: false,
   // 是否显示设置的底部信息
   isShowFooter: true,
   // 菜单是否夜晚模式
