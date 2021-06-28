@@ -1,50 +1,45 @@
 <template>
-    <card ref="Card">
-        <div slot="header">
-            <span class="title">已租用列表</span>
-            <el-input placeholder="输入器材名称搜索" v-model="searchName" clearable class="w-200" @keyup.enter.native="getData"/>
-            <el-button type="success" class="el-icon-search ml-5" @click="getData">搜索</el-button>
-        </div>
-        <expand-table :data="formData">
-            <el-table-column prop="equipId" label="器材编号">
-                <template slot-scope="scope">
-                    <span>{{scope.row.equipId}}</span>
-                </template>
-            </el-table-column>
-            <el-table-column prop="equipName" label="器材名称">
-                <template slot-scope="scope">
-                    <span>{{scope.row.equipName}}</span>
-                </template>
-            </el-table-column>
-            <el-table-column prop="startTime" label="开始时间">
-                <template slot-scope="scope">
-                    <span>{{scope.row.startTime | formatDateTime}}</span>
-                </template>
-            </el-table-column>
-            <el-table-column prop="endTime" label="结束时间">
-                <template slot-scope="scope">
-                    <span>{{scope.row.endTime | formatDateTime}}</span>
-                </template>
-            </el-table-column>
+<card ref="Card">
+    <div slot="header">
+        <span class="title">报修清单</span>
+        <el-input placeholder="输入器材名称搜索" v-model="searchName" clearable class="w-200" @keyup.enter.native="getData"/>
+        <el-button type="success" class="el-icon-search ml-5" @click="getData">搜索</el-button>
+    </div>
+    <expand-table :data="formData">
+        <el-table-column prop="equipId" label="器材ID">
+            <template slot-scope="scope">
+                <span>{{scope.row.equipId}}</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="equipName" label="器材名称">
+            <template slot-scope="scope">
+                <span>{{scope.row.equipName}}</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="describes" label="报修描述">
+            <template slot-scope="scope">
+                <span>{{scope.row.describes}}</span>
+            </template>
+        </el-table-column>
 
-            <el-table-column label="操作" align="center" width="150">
-                <template slot-scope="scope">
-                    <el-button type="primary"  @click.stop="edit(scope.row)" >归还</el-button>
-                    <!--                    <delete-button :ref="scope.row.id" :id="scope.row.id" @start="delData" v-permission="'delRole'"/>-->
-                </template>
-            </el-table-column>
-        </expand-table>
-        <pagination ref="Pagination" @update="getData"/>
-        <edit ref="Edit" @update="getData"/>
+        <el-table-column label="操作" align="center" width="150">
+            <template slot-scope="scope">
+                <el-button type="primary"  @click.stop="edit(scope.row)" >修复</el-button>
+                <!--                    <delete-button :ref="scope.row.id" :id="scope.row.id" @start="delData" v-permission="'delRole'"/>-->
+            </template>
+        </el-table-column>
+    </expand-table>
+    <pagination ref="Pagination" @update="getData"/>
+    <edit ref="Edit" @update="getData"/>
 
-    </card>
+</card>
 </template>
 
 <script>
     import Edit from "./edit";
     import {pageRentEquipmentApi, getEquipApi,editEquipApi,getRentEquipmentApi, editRentEquipmentApi} from "../../../api/equip";
     export default {
-        name: "equipReclaim",
+        name: "repairList",
         components:{Edit},
         data() {
             return {
@@ -62,7 +57,7 @@
                 let param = {
                     current: pagination.current,
                     size: pagination.size,
-                    status: 4,
+                    status: 1,
                 };
                 pageRentEquipmentApi(param).then(result => {
                     let response = result.resultParam.rentEquipmentPage;

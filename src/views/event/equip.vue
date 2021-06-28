@@ -26,7 +26,7 @@
     </div>
     <div class="title">已安排器材</div>
     <expand-table :data="rentEquipList" >
-      <el-table-column prop="equipId" label="器材Id">
+      <el-table-column prop="equipId" label="器材编号">
         <template slot-scope="scope">
           <span>{{scope.row.equipId}}</span>
         </template>

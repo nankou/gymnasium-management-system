@@ -4,6 +4,7 @@ const Analyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const isOpenAnalyzer = false;
 module.exports = {
   publicPath: settings.isHistory ? "/" : "./",
+  // publicPath:"./",
   outputDir: "dist",
   assetsDir: "static",
   indexPath: "index.html",
@@ -51,7 +52,7 @@ module.exports = {
     proxy: {
       "/api": {
         target: "http://121.5.33.107:8091",
-        // target: "http://localhost:8091",
+        // target: "http://localhost:8092",
         changeOrigin: true,
         pathRewrite: {
           "^/api": ""

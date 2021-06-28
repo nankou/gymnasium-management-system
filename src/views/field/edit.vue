@@ -10,7 +10,14 @@
         <el-input v-model="form.name"></el-input>
       </el-form-item>
       <el-form-item label="场地类型" prop="type">
-        <el-input v-model="form.type"></el-input>
+        <el-select v-model="form.type" placeholder="请选择场地类型">
+          <el-option
+                  v-for="item in options"
+                  :key="item.type"
+                  :label="item.label"
+                  :value="item.type">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="使用时间" prop="time">
         <date-time-picker :start.sync="form.startTime" :end.sync="form.endTime"/>
@@ -19,7 +26,14 @@
         <el-input v-model="form.charge"></el-input>
       </el-form-item>
       <el-form-item label="场地状态" prop="status">
-        <el-input v-model="form.status"></el-input>
+        <el-select v-model="form.status" placeholder="请选择场地状态">
+          <el-option
+                  v-for="item in soptions"
+                  :key="item.type"
+                  :label="item.label"
+                  :value="item.type">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="场地说明" prop="position">
         <el-input type="textarea" v-model="form.position"></el-input>
@@ -35,7 +49,7 @@
 
 <script>
 import {resetForm} from "@/utils/common";
-import {addFieldApi, editFieldApi} from "../../api/field";
+import {editFieldApi} from "../../api/field";
 
 export default {
   name: "editField",
@@ -58,7 +72,30 @@ export default {
         startTime: {required: true, message: '请选择使用时间', trigger: 'change'},
         status: {required: true, message: '请输入场地状态', trigger: 'blur'},
         position: {required: true, message: '请输入场地说明', trigger: 'blur'}
-      }
+      },
+      options:[{
+        type: 0,
+        label:'未预约'
+      },{
+        type:1,
+        label:'个人'
+      },{
+        type:2,
+        label:'赛事'
+      },{
+        type:3,
+        label:'上课'
+      },{
+        type:4,
+        label:'校队'
+      }],
+      soptions: [{
+        type: 0,
+        label: '未通过'
+      }, {
+        type: 1,
+        label: '审核通过'
+      }],
     }
   },
   methods: {

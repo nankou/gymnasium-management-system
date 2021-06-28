@@ -132,7 +132,6 @@ export default {
             this.$refs[id].stop();
           })
     },
-
   }
 }
 </script>

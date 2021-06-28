@@ -7,7 +7,7 @@
     </div>
 
       <expand-table :data="formData">
-          <el-table-column prop="id" label="器材ID">
+          <el-table-column prop="id" label="器材编号">
               <template slot-scope="scope">
                   <span>{{scope.row.id}}</span>
               </template>
@@ -22,9 +22,9 @@
                   <span>{{scope.row.rent}}</span>
               </template>
           </el-table-column>
-          <el-table-column prop="status" label="器材备注">
+          <el-table-column prop="describes" label="器材备注">
               <template slot-scope="scope">
-                  <span>{{scope.row.status}}</span>
+                  <span>{{scope.row.describes}}</span>
               </template>
           </el-table-column>
           <!--      <el-table-column prop="fieldStatus" label="场地审批状态">-->

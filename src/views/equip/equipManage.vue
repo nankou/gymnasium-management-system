@@ -7,7 +7,7 @@
             <el-button class="float-right" type="primary" icon="el-icon-plus" @click="add">增添器材</el-button>
         </div>
         <expand-table :data="formData">
-            <el-table-column prop="id" label="器材ID">
+            <el-table-column prop="id" label="器材编号">
                 <template slot-scope="scope">
                     <span>{{scope.row.id}}</span>
                 </template>
@@ -22,9 +22,9 @@
                     <span>{{scope.row.rent}}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="status" label="器材备注">
+            <el-table-column prop="describes" label="器材备注">
                 <template slot-scope="scope">
-                    <span>{{scope.row.status}}</span>
+                    <span>{{scope.row.describes}}</span>
                 </template>
             </el-table-column>
             <!--      <el-table-column prop="fieldStatus" label="场地审批状态">-->
@@ -105,9 +105,9 @@
             // 编辑
             edit(obj) {
                 this.$refs.Card.start();
-                this.$refs.Edit.visible = true
+                this.$refs.Edit.visible = true;
                 getEquipApi({id: obj.id}).then(result => {
-                    let response = result.resultParam.event;
+                    let response = result.resultParam.equip;
                     let _this = this.$refs.Edit;
                     _this.form.id = obj.id; // 添加编辑的id
                     objectEvaluate(_this.form, response, this);
@@ -115,7 +115,8 @@
                     this.$refs.Card.stop();
                 }).catch(() => {
                     this.$refs.Card.stop();
-                })
+                });
+
             },
         }
 

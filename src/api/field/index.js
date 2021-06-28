@@ -12,3 +12,5 @@ export const delFineNoticeApi = data => axiosD("fineNotice/delFineNotice", data)
 export const editFineNoticeApi = data => axiosP("fineNotice/editFineNotice", data); // 更改场馆公告
 export const getFineNoticeApi = data => axiosG("fineNotice/getFineNotice", data); // 获得场馆公告详情
 export const pageFineNoticeApi = data => axiosG("fineNotice/pageFineNotice", data); // 获得场馆公告列表
+
+

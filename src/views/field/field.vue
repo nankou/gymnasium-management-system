@@ -14,7 +14,7 @@
       </el-table-column>
       <el-table-column prop="type" label="场地类型">
         <template slot-scope="scope">
-          <span>{{scope.row.type}}</span>
+          <span>{{translate(scope.row.type)}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="startTime" label="开始时间">
@@ -29,7 +29,7 @@
       </el-table-column>
       <el-table-column prop="status" label="场地状态">
         <template slot-scope="scope">
-          <span>{{scope.row.status}}</span>
+          <span>{{translates(scope.row.status)}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="charge" label="场地价格（元/小时）"/>
@@ -71,6 +71,39 @@
       this.getData();
     },
     methods: {
+      translates(status){
+        switch (status) {
+          case 0:
+            return '未通过'
+            break;
+          case 1:
+            return '审核通过'
+            break;
+          default:
+                return '未通过'
+        }
+      },
+      translate(type){
+        switch (type) {
+          case 0:
+            return '未预约'
+            break;
+          case 1:
+            return '个人'
+            break;
+          case  2:
+            return '赛事'
+            break;
+          case 3:
+            return '上课'
+          break;
+          case 4:
+            return '校队'
+            break;
+          default:
+            return '未预约'
+        }
+      },
       getData() {
         this.$refs.Card.start();
         let pagination = this.$refs.Pagination;
@@ -103,6 +136,7 @@
         }).catch(() => {
           this.$refs.Card.stop();
         })
+
       },
       // 删除
       delData(id) {

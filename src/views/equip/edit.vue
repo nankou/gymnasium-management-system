@@ -15,8 +15,8 @@
             <el-form-item label="租借费用(元/小时)"prop="rent">
                 <el-input v-model="form.rent"></el-input>
             </el-form-item>
-            <el-form-item label="器材备注" prop="status">
-                <el-input v-model="form.status"></el-input>
+            <el-form-item label="器材备注" prop="describes">
+                <el-input v-model="form.describes"></el-input>
             </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -40,7 +40,7 @@
                     id:"",
                     name: "",
                     rent: "",
-                    status: "",
+                    describes: "",
                 },
                 rules: {
                     // id: {required: true, message: '请输入器材ID', trigger: 'blur'},

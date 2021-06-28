@@ -26,7 +26,7 @@
     </div>
     <div class="title">已安排场地</div>
     <expand-table :data="fieldReserveList" >
-      <el-table-column prop="fieldId" label="场地Id">
+      <el-table-column prop="fieldId" label="场地编号">
         <template slot-scope="scope">
           <span>{{scope.row.fieldId}}</span>
         </template>
@@ -153,7 +153,6 @@
               this.$refs[id].stop();
             })
       }
-
     }
   }
 </script>
